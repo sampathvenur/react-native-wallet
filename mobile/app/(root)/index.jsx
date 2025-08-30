@@ -8,21 +8,18 @@ import { useEffect } from "react";
 export default function Page() {
   const { user } = useUser();
   const { transactions, summary, isLoading, loadData, deleteTransaction } = useTransactions(
-    user.id
+    user?.id
   );
 
   useEffect(() => {
-    loadData();
-  }, [loadData]);
-}
+    if (user?.id) {
+      loadData();
+    }
+  }, [user?.id, loadData]);
 
-console.log("userId", user.id);
-
-console.log("transactions:", transactions);
-console.log("summary:", summary);
-
-export default function Page() {
-  const { user } = useUser()
+  console.log("userId", user?.id);
+  console.log("transactions:", transactions);
+  console.log("summary:", summary);
 
   return (
     <View>
@@ -39,5 +36,5 @@ export default function Page() {
         </Link>
       </SignedOut>
     </View>
-  )
+  );
 }
